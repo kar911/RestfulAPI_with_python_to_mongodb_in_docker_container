@@ -1,0 +1,25 @@
+#yaml version 3
+version: '3'
+# creating two services web and db
+services:
+#specifying metadata for flaskapi
+  web:
+#directing to folder web to create the container with flaskapi
+    build: ./web
+#exposing to port 5000 of machine to 5000 of container
+    ports:
+      - "5000:5000"
+#setting link to db container
+    links:
+      - db
+#specifying metadata for mongodb
+  db:
+#directing to folder db to create the container with mongodb image
+    build: ./db
+#giving host name
+    hostname: test_mongodb
+#initialyzing database , username and password for mongodb environment
+    environment:
+    - MONGO_INITDB_DATABASE=newdb
+    - MONGO_INITDB_ROOT_USERNAME=root
+    - MONGO_INITDB_ROOT_PASSWORD=pass
